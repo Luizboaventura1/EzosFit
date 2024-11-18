@@ -4,4 +4,4 @@ EzosFit is a web app designed to help you calculate the ideal macronutrient inta
 ### Interface
 Here is the interface of the software when it's finished. There will still be changes to this template, but this serves as a foundation for how it will look.
 
-![Dashboard EzosFit](https://github.com/user-attachments/assets/058285be-cf35-412d-a427-7fd05416fbdf)
+![Dashboard EzosFit](https://github.com/user-attachments/assets/c6d41836-c7d6-4fe0-9e88-dac776adad48)
