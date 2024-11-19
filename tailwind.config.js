@@ -10,10 +10,14 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        custom: ["Inter"],
+      colors: {
+        "primary-color": "#006CFA",
+        "light-gray": "#E9E9E9",
+        "charcoal": "#262626",
+        "medium-gray": "#ABABAB",
+        "dark-charcoal": "#191919",
+        "almost-black": "#0C0C0C",
       },
-      colors: {},
     },
   },
   plugins: [],
