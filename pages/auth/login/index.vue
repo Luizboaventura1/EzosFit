@@ -1,9 +1,17 @@
 <template>
-  <section class="grid grid-rows-3 md:grid-rows-none md:grid-cols-2 w-full h-screen">
+  <section
+    class="grid grid-rows-3 md:grid-rows-none md:grid-cols-2 w-full h-screen"
+  >
     <div class="image-bg w-full h-full">
-      <div class="flex justify-center items-center w-full h-full bg-black bg-opacity-70"> 
-        <div class="flex gap-4 items-center"> 
-          <img class="w-14 h-14" src="../../../assets/images/ezos-fit-logo.png" alt="EzosFit Logo">
+      <div
+        class="flex justify-center items-center w-full h-full bg-black bg-opacity-70"
+      >
+        <div class="flex gap-4 items-center">
+          <img
+            class="w-14 h-14"
+            src="../../../assets/images/ezos-fit-logo.png"
+            alt="EzosFit Logo"
+          />
           <h1 class="font-bold text-5xl text-light-gray">EzosFit</h1>
         </div>
       </div>
@@ -17,7 +25,9 @@
             <h1 class="text-light-gray font-bold text-2xl">Login</h1>
           </header>
           <div class="mb-10">
-            <GoogleButton> Login with Google </GoogleButton>
+            <GoogleButton @click="loginWithGoogle">
+              Login with Google
+            </GoogleButton>
           </div>
           <article>
             <section>
@@ -35,6 +45,34 @@
 
 <script setup lang="ts">
 import GoogleButton from "./GoogleButton.vue";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useRouter } from "vue-router";
+import { userDataStructure } from "~/utils/userDataStructure";
+
+const router = useRouter()
+
+const loginWithGoogle = async () => {
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    if (!(await checkIfTheUserExists(user.email ? user.email : null))) {
+      userDataStructure.uid = user.uid
+      userDataStructure.name = user.displayName
+      userDataStructure.email = user.email
+      userDataStructure.photoUrl = user.photoURL
+      
+      await addUserToFirebase(userDataStructure)
+    }
+
+    console.log("Usuário logado com Google:", user);
+  } catch (error: any) {
+    console.error("Erro ao fazer login com Google:", error.message);
+  }
+};
 
 useHead({
   title: "Login",
