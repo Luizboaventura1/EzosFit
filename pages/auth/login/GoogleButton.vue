@@ -25,7 +25,7 @@
       </g>
     </svg>
 
-    <span class="text-white ms-3 font-medium">
+    <span class="text-white ms-3 font-semibold">
       <slot />
     </span>
   </button>
