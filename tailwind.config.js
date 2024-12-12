@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     "./components/**/*.{js,vue,ts}",
     "./layouts/**/*.vue",
@@ -15,6 +15,7 @@ module.exports = {
         "light-gray": "#E9E9E9",
         "charcoal": "#262626",
         "medium-gray": "#ABABAB",
+        "charcoal-gray": "#484848",
         "dark-charcoal": "#191919",
         "almost-black": "#0C0C0C",
       },
