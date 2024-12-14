@@ -6,14 +6,7 @@
       <div
         class="flex justify-center items-center w-full h-full bg-black bg-opacity-70"
       >
-        <div class="flex gap-4 items-center">
-          <img
-            class="w-14 h-14"
-            src="../../../assets/images/ezos-fit-logo.png"
-            alt="EzosFit Logo"
-          />
-          <h1 class="font-bold text-5xl text-light-gray">EzosFit</h1>
-        </div>
+        <EzosFitLogo size="big" />
       </div>
     </div>
     <div class="w-full h-full bg-dark-charcoal row-span-2 md:row-span-1">
@@ -22,7 +15,7 @@
       >
         <main class="w-full md:max-w-md lg:max-w-lg">
           <header class="mb-10">
-            <h1 class="text-light-gray font-bold text-2xl">Login</h1>
+            <h1 class="text-light-gray font-extrabold text-2xl">Login</h1>
           </header>
           <div class="mb-10">
             <GoogleButton @click="loginWithGoogle">
@@ -45,11 +38,16 @@
 
 <script setup lang="ts">
 import GoogleButton from "./GoogleButton.vue";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { useRouter } from "vue-router";
 import { userDataStructure } from "~/utils/userDataStructure";
 
-const router = useRouter()
+const router = useRouter();
 
 const loginWithGoogle = async () => {
   const auth = getAuth();
@@ -60,22 +58,35 @@ const loginWithGoogle = async () => {
     const user = result.user;
 
     if (!(await checkIfTheUserExists(user.email ? user.email : null))) {
-      userDataStructure.uid = user.uid
-      userDataStructure.name = user.displayName
-      userDataStructure.email = user.email
-      userDataStructure.photoUrl = user.photoURL
-      
+      userDataStructure.uid = user.uid;
+      userDataStructure.name = user.displayName;
+      userDataStructure.email = user.email;
+      userDataStructure.photoUrl = user.photoURL;
+
       await addUserToFirebase(userDataStructure)
     }
 
-    console.log("Usuário logado com Google:", user);
+    router.push("/dashboard");
   } catch (error: any) {
-    console.error("Erro ao fazer login com Google:", error.message);
+    console.error("Erro ao fazer login com Google");
   }
 };
 
 useHead({
   title: "Login",
+});
+
+onMounted(() => {
+  const auth = getAuth();
+
+  onAuthStateChanged(auth, (user) => {
+    let token = useCookie<boolean>("token");
+    token.value = !!user;
+
+    if (token.value) {
+      router.push("/dashboard");
+    }
+  });
 });
 </script>
 
