@@ -29,9 +29,7 @@
           <AccountModal size="30" />
         </div>
       </nav>
-      <div>
-
-      </div>
+      <div></div>
     </main>
   </section>
 </template>
@@ -46,7 +44,7 @@ import PrimaryText from "~/components/global/text/PrimaryText.vue";
 import currentDate from "~/composables/currentDate";
 
 const router = useRouter();
-let userName = ref<string>();
+const userName = ref<string>();
 
 onMounted(() => {
   const auth = getAuth();
