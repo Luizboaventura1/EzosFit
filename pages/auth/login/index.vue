@@ -34,6 +34,8 @@
       </div>
     </div>
   </section>
+
+  <Toast :toast /> 
 </template>
 
 <script setup lang="ts">
@@ -46,8 +48,10 @@ import {
 } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { userDataStructure } from "~/utils/userDataStructure";
+import Toast from "@/components/global/popups/Toast/index.vue"
 
 const router = useRouter();
+const toast= useToast()
 
 const loginWithGoogle = async () => {
   const auth = getAuth();
@@ -68,7 +72,10 @@ const loginWithGoogle = async () => {
 
     router.push("/dashboard");
   } catch (error: any) {
-    console.error("Erro ao fazer login com Google");
+    toast.add({
+      title: "Error logging in with Google. Come back later.",
+      timeout: 3000
+    })
   }
 };
 
