@@ -1,0 +1,33 @@
+<template>
+  <div
+    :class="[checked ? 'border-green-700 bg-green-700': 'border-charcoal-gray bg-transparent']"
+    class="flex justify-center items-center w-6 h-6 rounded-full border-2 border-charcoal-gray cursor-pointer"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 507.506 507.506"
+      style="enable-background: new 0 0 512 512"
+      xml:space="preserve"
+      :class="[checked ? 'fill-light-gray' : 'fill-charcoal-gray']"
+      class="w-3 h-3"
+    >
+      <g>
+        <path
+          d="M163.865 436.934a54.228 54.228 0 0 1-38.4-15.915L9.369 304.966c-12.492-12.496-12.492-32.752 0-45.248 12.496-12.492 32.752-12.492 45.248 0l109.248 109.248L452.889 79.942c12.496-12.492 32.752-12.492 45.248 0 12.492 12.496 12.492 32.752 0 45.248L202.265 421.019a54.228 54.228 0 0 1-38.4 15.915z"
+          opacity="1"
+          data-original="#000000"
+        ></path>
+      </g>
+    </svg>
+  </div>
+</template>
+
+<script setup lang="ts">
+defineProps<{
+  checked: boolean;
+}>();
+</script>
+
+<style scoped></style>
