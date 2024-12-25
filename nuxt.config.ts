@@ -2,11 +2,11 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
 
-  css: ['../assets/css/main.css'],
+  css: ["../assets/css/main.css"],
 
   devtools: { enabled: true },
 
-  modules: ["@nuxtjs/tailwindcss", '@pinia/nuxt'],
+  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt"],
 
   runtimeConfig: {
     apiKey: process.env.NUXT_API_KEY,
@@ -24,6 +24,6 @@ export default defineNuxtConfig({
       messagingSenderId: process.env.NUXT_MESSAGING_SENDER_ID,
       appId: process.env.NUXT_APP_ID,
       measurementId: process.env.NUXT_MEASUREMENT_ID,
-    }
+    },
   },
 });
