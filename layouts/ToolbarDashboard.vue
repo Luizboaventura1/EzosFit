@@ -9,7 +9,7 @@
       </div>
     </div>
     <div>
-      <AccountModal size="30" />
+      <AccountModal size="35" />
     </div>
   </nav>
 </template>
@@ -18,7 +18,7 @@
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 import AccountModal from "@/components/global/modals/AccountModal.vue";
 import currentDate from "@/composables/currentDate";
-import PrimaryText from "~/components/global/text/PrimaryText.vue";
+import PrimaryText from "@/components/global/text/PrimaryText.vue";
 
 const userName = ref("");
 
