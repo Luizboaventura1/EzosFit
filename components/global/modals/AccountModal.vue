@@ -100,11 +100,10 @@
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import PrimaryText from "../text/PrimaryText.vue";
 
-let props = defineProps<{ size: string }>();
-
+const props = defineProps<{ size: string }>();
 const router = useRouter();
-let userPhoto = ref<string | undefined>(undefined);
-let stateModal = ref(false);
+const userPhoto = ref<string | null>(null);
+const stateModal = ref(false);
 
 const toggleModal = () => {
   stateModal.value = !stateModal.value;
@@ -133,21 +132,22 @@ const handleClickOutside = (event: Event) => {
   }
 };
 
+onBeforeUnmount(() => {
+  document.body.removeEventListener("click", handleClickOutside);
+});
+
 onMounted(() => {
   document.body.addEventListener("click", handleClickOutside);
 });
 
 onMounted(() => {
   const auth = getAuth();
+
   onAuthStateChanged(auth, (user) => {
-    if (user) {
-      userPhoto.value = user.photoURL || undefined;
+    if (user && user.photoURL) {
+      userPhoto.value = user.photoURL;
     }
   });
-});
-
-onBeforeUnmount(() => {
-  document.body.removeEventListener("click", handleClickOutside);
 });
 </script>
 
