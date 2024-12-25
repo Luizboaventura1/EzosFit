@@ -12,7 +12,7 @@ export default interface User {
     age: number | null,
     height: number | null,
     weight: number | null,
-    bodyFat: number | null,
+    bodyFat?: number | null,
     objective: string | null,
     activityLevel: string | null,
   },
