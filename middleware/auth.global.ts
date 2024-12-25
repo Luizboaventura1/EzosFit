@@ -1,7 +1,11 @@
 export default defineNuxtRouteMiddleware(async (to) => {
-  let token = useCookie<boolean>('token')
+  const token = useCookie<boolean>("token");
 
-  if (token.value === false && to.path === "/dashboard") {
+  // If the token does not exist and the user tries to access /dashboard or /questionnaire
+  if (
+    !token.value &&
+    (to.path === "/dashboard" || to.path === "/questionnaire")
+  ) {
     return navigateTo("/auth/login");
   }
 });
