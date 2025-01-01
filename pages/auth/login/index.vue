@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import GoogleButton from "./GoogleButton.vue";
+import GoogleButton from "../../../components/auth/GoogleButton.vue";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -79,7 +79,7 @@ const loginWithGoogle = async () => {
   } catch (error: any) {
     toast.add({
       title: "Error logging in with Google. Come back later.",
-      timeout: 3000,
+      timeout: 5000,
     });
   }
 };
