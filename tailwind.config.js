@@ -13,7 +13,7 @@ export default {
       colors: {
         "primary-color": "#006CFA",
         "light-gray": "#E9E9E9",
-        "charcoal": "#262626",
+        "charcoal": "#303030",
         "medium-gray": "#ABABAB",
         "charcoal-gray": "#484848",
         "dark-charcoal": "#191919",
