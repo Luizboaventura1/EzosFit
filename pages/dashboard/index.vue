@@ -44,7 +44,7 @@ onMounted(async () => {
       !isBodyMetricsValid(user.value.bodyMetrics)
     ) {
       router.push("/questionnaire");
-    }
+    } 
   });
 });
 </script>
