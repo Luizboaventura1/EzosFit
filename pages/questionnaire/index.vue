@@ -170,11 +170,11 @@ interface Stepper {
 }
 
 const stepperControl = ref<Stepper>({
-  steppers: { 1: true, 2: false, 3: false, 4: false, 5: false, 6: false },
+  steppers: { 1: true, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false },
   currentStepper: 1,
   next: function () {
     const totalSteps = Object.keys(this.steppers).length;
-    if (this.currentStepper <= totalSteps) {
+    if (this.currentStepper < totalSteps) {
       this.steppers[this.currentStepper] = false;
       ++this.currentStepper;
       this.steppers[this.currentStepper] = true;
