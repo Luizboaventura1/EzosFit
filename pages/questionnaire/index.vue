@@ -15,6 +15,9 @@
               <Dropdown
                 selectName="Select"
                 :options="[...questions.objective.options]"
+                @selectedOption="
+                  (val) => (bodyMetricsQuestionnaire.objective = val)
+                "
               />
             </div>
           </div>
@@ -29,6 +32,9 @@
               <Dropdown
                 selectName="Select"
                 :options="[...questions.activityLevel.options]"
+                @selectedOption="
+                  (val) => (bodyMetricsQuestionnaire.activityLevel = val)
+                "
               />
             </div>
           </div>
@@ -41,7 +47,7 @@
             </header>
             <div class="flex justify-center">
               <NumberInputForm
-                @modelValue="(val) => console.log(val)"
+                @modelValue="(val) => (bodyMetricsQuestionnaire.height = val)"
                 unit="cm"
               />
             </div>
@@ -57,6 +63,7 @@
               <Dropdown
                 selectName="Select"
                 :options="[...questions.sex.options]"
+                @selectedOption="(val) => (bodyMetricsQuestionnaire.sex = val)"
               />
             </div>
           </div>
@@ -69,7 +76,7 @@
             </header>
             <div class="flex justify-center">
               <NumberInputForm
-                @modelValue="(val) => console.log(val)"
+                @modelValue="(val) => (bodyMetricsQuestionnaire.age = val)"
                 unit="years"
               />
             </div>
@@ -83,7 +90,7 @@
             </header>
             <div class="flex justify-center">
               <NumberInputForm
-                @modelValue="(val) => console.log(val)"
+                @modelValue="(val) => (bodyMetricsQuestionnaire.weight = val)"
                 unit="kg"
               />
             </div>
@@ -102,7 +109,7 @@
             </header>
             <div class="flex justify-center">
               <NumberInputForm
-                @modelValue="(val) => console.log(val)"
+                @modelValue="(val) => (bodyMetricsQuestionnaire.bodyFat = val)"
                 unit="%"
               />
             </div>
@@ -158,9 +165,9 @@ const questions = {
     options: ["Lose Weight", "Maintain Weight", "Build Muscle"],
   },
 } as const;
-const bodyMetricsQuestionnaire: User["bodyMetrics"] = {
+const bodyMetricsQuestionnaire = ref<User["bodyMetrics"]>({
   ...userDataStructure.bodyMetrics,
-};
+});
 
 interface Stepper {
   steppers: { [id: number]: boolean };
@@ -170,7 +177,15 @@ interface Stepper {
 }
 
 const stepperControl = ref<Stepper>({
-  steppers: { 1: true, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false },
+  steppers: {
+    1: true,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+    6: false,
+    7: false,
+  },
   currentStepper: 1,
   next: function () {
     const totalSteps = Object.keys(this.steppers).length;
