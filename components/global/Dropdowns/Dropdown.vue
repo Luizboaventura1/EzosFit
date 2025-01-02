@@ -55,11 +55,14 @@ const props = defineProps<{
   selectName: string;
 }>();
 
+const emit = defineEmits(['selectedOption'])
+
 const dropdownState = ref(false);
 const selectedOption = ref(props.selectName);
 
 const selectOption = (option: string) => {
   selectedOption.value = option;
+  emit('selectedOption', selectedOption.value) 
   toggleDrowdownState();
 };
 
