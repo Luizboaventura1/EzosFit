@@ -16,29 +16,32 @@
         class="appearance-none bg-transparent text-center focus:outline-none py-3"
         type="number"
       />
-      <div v-if="props.unit" class="text-medium-gray foont-light self-end pb-2">{{ props.unit  }}</div>
+      <div v-if="props.unit" class="text-medium-gray foont-light self-end pb-2">
+        {{ props.unit }}
+      </div>
     </div>
     <button
       type="button"
       @click="$emit('modelValue', --inputValue)"
       class="border-s border-charcoal-gray pr-5 ps-3 py-3 hover:bg-charcoal transition-colors duration-200"
     >
-      <LessIcon size="14" /> 
+      <LessIcon size="14" />
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import LessIcon from '../icons/LessIcon.vue';
-import PlusIcon from '../icons/PlusIcon.vue';
-
-const inputValue = ref(0);
+import LessIcon from "../icons/LessIcon.vue";
+import PlusIcon from "../icons/PlusIcon.vue";
 
 const props = defineProps<{
-  unit?: string
-}>()
+  unit?: string;
+  defaultValue?: number | null;
+}>();
+
+const inputValue = ref(props.defaultValue ?? 0);
 
 watch(inputValue, (newValue, oldValue) => {
- if (newValue < 0) inputValue.value = oldValue
-})
+  if (newValue < 0) inputValue.value = oldValue;
+});
 </script>
