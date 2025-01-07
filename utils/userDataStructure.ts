@@ -14,6 +14,7 @@ export const userDataStructure = {
   },
   nutrition: {
     caloricTarget: null as number | null,
+    waterTarget: null as number | null,
     macroTargets: {
       protein: null as number | null,
       carbohydrates: null as number | null,
