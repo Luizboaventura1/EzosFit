@@ -4,7 +4,7 @@
   >
     <div>
       <div>
-        <PrimaryText md> {{ userName }} </PrimaryText>
+        <PrimaryText md> Hello, {{ userName }} </PrimaryText>
         <h2 class="text-medium-gray text-sm">{{ currentDate() }}</h2>
       </div>
     </div>

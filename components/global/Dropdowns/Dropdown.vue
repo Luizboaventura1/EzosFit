@@ -53,12 +53,13 @@
 const props = defineProps<{
   options: string[];
   selectName: string;
+  defaultValue?: string | null;
 }>();
 
 const emit = defineEmits(['selectedOption'])
 
 const dropdownState = ref(false);
-const selectedOption = ref(props.selectName);
+const selectedOption = ref(props.defaultValue ?? props.selectName);
 
 const selectOption = (option: string) => {
   selectedOption.value = option;

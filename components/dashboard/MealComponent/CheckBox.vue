@@ -1,5 +1,6 @@
 <template>
   <div
+    @click.stop
     :class="[checked ? 'border-green-700 bg-green-700': 'border-charcoal-gray bg-transparent']"
     class="flex justify-center items-center w-6 h-6 rounded-full border-2 border-charcoal-gray cursor-pointer"
   >

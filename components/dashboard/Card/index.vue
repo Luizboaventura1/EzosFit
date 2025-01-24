@@ -6,14 +6,18 @@
       <div class="bg-primary-color rounded-lg flex justify-center items-center p-2">
         <slot name="icon" />
       </div>
-      <slot name="title" />
+      <div class="flex gap-3 justify-between items-center w-full">
+        <h1 class="text-light-gray font-semibold">
+          <slot  name="title" />
+        </h1>
+        <div>
+          <slot name="action" />
+        </div>
+      </div>
     </header>
-    <main class="self-end">
+
+    <main>
       <slot />
     </main>
   </div>
 </template>
-
-<script setup lang="ts"></script>
-
-<style scoped></style>

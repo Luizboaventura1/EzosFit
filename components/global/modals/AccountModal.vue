@@ -60,7 +60,7 @@
               ></path>
             </g>
           </svg>
-          <PrimaryText sm> Conta </PrimaryText>
+          <PrimaryText sm> Account </PrimaryText>
         </header>
         <main>
           <button
@@ -88,7 +88,7 @@
                 ></path>
               </g>
             </svg>
-            Sair da conta
+            Log out
           </button>
         </main>
       </div>

@@ -14,6 +14,7 @@
             <div class="flex justify-center">
               <Dropdown
                 selectName="Select"
+                :default-value="bodyMetricsQuestionnaire.objective"
                 :options="[...questions.objective.options]"
                 @selectedOption="
                   (val) => (bodyMetricsQuestionnaire.objective = val)
@@ -31,6 +32,7 @@
             <div class="flex justify-center">
               <Dropdown
                 selectName="Select"
+                :default-value="bodyMetricsQuestionnaire.activityLevel"
                 :options="[...questions.activityLevel.options]"
                 @selectedOption="
                   (val) => (bodyMetricsQuestionnaire.activityLevel = val)
@@ -48,6 +50,7 @@
             <div class="flex justify-center">
               <NumberInputForm
                 @modelValue="(val) => (bodyMetricsQuestionnaire.height = val)"
+                :default-value="bodyMetricsQuestionnaire.height"
                 unit="cm"
               />
             </div>
@@ -62,6 +65,7 @@
             <div class="flex justify-center">
               <Dropdown
                 selectName="Select"
+                :default-value="bodyMetricsQuestionnaire.sex"
                 :options="[...questions.sex.options]"
                 @selectedOption="(val) => (bodyMetricsQuestionnaire.sex = val)"
               />
@@ -77,6 +81,7 @@
             <div class="flex justify-center">
               <NumberInputForm
                 @modelValue="(val) => (bodyMetricsQuestionnaire.age = val)"
+                :default-value="bodyMetricsQuestionnaire.age"
                 unit="years"
               />
             </div>
@@ -91,6 +96,7 @@
             <div class="flex justify-center">
               <NumberInputForm
                 @modelValue="(val) => (bodyMetricsQuestionnaire.weight = val)"
+                :default-value="bodyMetricsQuestionnaire.weight"
                 unit="kg"
               />
             </div>
@@ -110,6 +116,7 @@
             <div class="flex justify-center">
               <NumberInputForm
                 @modelValue="(val) => (bodyMetricsQuestionnaire.bodyFat = val)"
+                :default-value="bodyMetricsQuestionnaire.bodyFat"
                 unit="%"
               />
             </div>
@@ -117,13 +124,32 @@
         </Transition>
       </main>
       <footer class="flex justify-between gap-4 items-center">
-        <SecondaryButton @click="stepperControl.previous()">
+        <SecondaryButton
+          v-if="!stepperControl.steppers[1]"
+          @click="stepperControl.previous()"
+        >
           Prev
         </SecondaryButton>
-        <SecondaryButton @click="stepperControl.next()"> Next </SecondaryButton>
+
+        <SecondaryButton
+          v-if="!stepperControl.steppers[7]"
+          class="ms-auto"
+          @click="stepperControl.next()"
+        >
+          Next
+        </SecondaryButton>
+
+        <SecondaryButton
+          v-if="stepperControl.steppers[7]"
+          @click="saveBodyMetrics(bodyMetricsQuestionnaire)"
+        >
+          Finish
+        </SecondaryButton>
       </footer>
     </div>
   </div>
+
+  <Toast :toast />
 </template>
 
 <script setup lang="ts">
@@ -132,13 +158,17 @@ import { storeToRefs } from "pinia";
 import IntroForm from "~/components/questionnaire/IntroForm.vue";
 import type User from "~/types/UserType";
 import { userDataStructure } from "@/utils/userDataStructure";
-import Dropdown from "~/components/global/Dropdowns/Dropdown.vue";
+import Dropdown from "~/components/global/dropdowns/Dropdown.vue";
 import SecondaryButton from "../../components/global/buttons/SecondaryButton.vue";
 import PrimaryText from "~/components/global/text/PrimaryText.vue";
 import NumberInputForm from "~/components/questionnaire/NumberInputForm.vue";
+import Toast from "@/components/global/popups/Toast/index.vue";
+import validateAllMetrics from "~/utils/bodyMetricsValidation/validateAllMetrics";
+import validateCurrentQuestion from "~/utils/bodyMetricsValidation/validateCurrentQuestion";
 
 const router = useRouter();
 const { user } = storeToRefs(userStore());
+const toast = useToast();
 const questions = {
   sex: {
     question: "What is your sex?",
@@ -169,6 +199,8 @@ const bodyMetricsQuestionnaire = ref<User["bodyMetrics"]>({
   ...userDataStructure.bodyMetrics,
 });
 
+type BodyMetrics = User["bodyMetrics"];
+
 interface Stepper {
   steppers: { [id: number]: boolean };
   currentStepper: number;
@@ -189,13 +221,31 @@ const stepperControl = ref<Stepper>({
   currentStepper: 1,
   next: function () {
     const totalSteps = Object.keys(this.steppers).length;
-    if (this.currentStepper < totalSteps) {
+
+    if (
+      this.currentStepper < totalSteps &&
+      validateCurrentQuestion(
+        this.currentStepper,
+        bodyMetricsQuestionnaire.value
+      )
+    ) {
       this.steppers[this.currentStepper] = false;
       ++this.currentStepper;
       this.steppers[this.currentStepper] = true;
+    } else if (
+      !validateCurrentQuestion(
+        this.currentStepper,
+        bodyMetricsQuestionnaire.value
+      )
+    ) {
+      toast.add({
+        title: "Check that the above information is correct.",
+        timeout: 5000,
+      });
     }
   },
   previous: function () {
+    // Check if the current step is greater than 1 (to avoid going to a non-existent step)
     if (this.currentStepper > 1) {
       this.steppers[this.currentStepper] = false;
       --this.currentStepper;
@@ -204,14 +254,27 @@ const stepperControl = ref<Stepper>({
   },
 });
 
+const saveBodyMetrics = (bodyMetrics: BodyMetrics) => {
+  if (validateAllMetrics(bodyMetrics) && user.value) {
+    user.value.bodyMetrics = bodyMetrics;
+
+    userStore().updateUserData({
+      bodyMetrics: bodyMetrics,
+    });
+
+    router.push("/dashboard");
+  } else {
+    toast.add({
+      title: "Check that the above information is correct.",
+      timeout: 5000,
+    });
+  }
+};
+
 onMounted(async () => {
   await loadUserData(router).then(() => {
-    if (
-      user.value &&
-      user.value.bodyMetrics &&
-      isBodyMetricsValid(user.value.bodyMetrics)
-    ) {
-      router.push("/questionnaire");
+    if (user.value && isBodyMetricsValid(user.value.bodyMetrics)) {
+      router.push("/dashboard");
     }
   });
 });

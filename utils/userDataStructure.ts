@@ -21,4 +21,5 @@ export const userDataStructure = {
       fats: null as number | null,
     },
   },
+  meals: [] 
 };

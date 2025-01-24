@@ -3,6 +3,7 @@ export default interface DailyLog {
   meals: [];
   dailyConsumption: {
     calories: number | null;
+    water: number | null,
     macros: {
       protein: number | null;
       carbohydrates: number | null;

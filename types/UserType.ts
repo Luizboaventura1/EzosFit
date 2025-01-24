@@ -24,6 +24,6 @@ export default interface User {
       fats: number | null;
     };
   };
-  dailyLog?: DailyLog;
-  meals?: Meal[];
+  dailyLog: DailyLog;
+  meals: Meal[] | null;
 }

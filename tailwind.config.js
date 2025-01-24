@@ -12,7 +12,7 @@ export default {
     extend: {
       colors: {
         "primary-color": "#006CFA",
-        "light-gray": "#E9E9E9",
+        "light-gray": "#cfcfcf",
         "charcoal": "#303030",
         "medium-gray": "#ABABAB",
         "charcoal-gray": "#484848",
