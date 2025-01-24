@@ -12,7 +12,7 @@
               </PrimaryText>
             </header>
             <div class="flex justify-center">
-              <Dropdown
+              <DefaultDropdown
                 selectName="Select"
                 :default-value="bodyMetricsQuestionnaire.objective"
                 :options="[...questions.objective.options]"
@@ -30,7 +30,7 @@
               </PrimaryText>
             </header>
             <div class="flex justify-center">
-              <Dropdown
+              <DefaultDropdown
                 selectName="Select"
                 :default-value="bodyMetricsQuestionnaire.activityLevel"
                 :options="[...questions.activityLevel.options]"
@@ -63,7 +63,7 @@
               </PrimaryText>
             </header>
             <div class="flex justify-center">
-              <Dropdown
+              <DefaultDropdown
                 selectName="Select"
                 :default-value="bodyMetricsQuestionnaire.sex"
                 :options="[...questions.sex.options]"
@@ -158,7 +158,7 @@ import { storeToRefs } from "pinia";
 import IntroForm from "@/components/questionnaire/IntroForm.vue";
 import type User from "@/types/UserType";
 import { userDataStructure } from "@/utils/userDataStructure";
-import Dropdown from "@/components/global/dropdowns/Dropdown.vue";
+import DefaultDropdown from "~/components/global/dropdowns/DefaultDropdown.vue";
 import SecondaryButton from "../../components/global/buttons/SecondaryButton.vue";
 import PrimaryText from "@/components/global/text/PrimaryText.vue";
 import NumberInputForm from "@/components/questionnaire/NumberInputForm.vue";

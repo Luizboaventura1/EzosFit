@@ -13,21 +13,21 @@
       </header>
 
       <main class="space-y-4">
-        <Dropdown
+        <DefaultDropdown
           class="z-40"
           selectName="Select"
           :default-value="bodyMetrics.objective"
           :options="[...questions.objective.options]"
           @selectedOption="(val) => (bodyMetrics.objective = val)"
         />
-        <Dropdown
+        <DefaultDropdown
           class="z-30"
           selectName="Select"
           :default-value="bodyMetrics.activityLevel"
           :options="[...questions.activityLevel.options]"
           @selectedOption="(val) => (bodyMetrics.activityLevel = val)"
         />
-        <Dropdown
+        <DefaultDropdown
           class="z-20"
           selectName="Select"
           :default-value="bodyMetrics.sex"
@@ -71,7 +71,7 @@ import SecondaryButton from "~/components/global/buttons/SecondaryButton.vue";
 import PrimaryText from "~/components/global/text/PrimaryText.vue";
 import type User from "~/types/UserType";
 import NumberInputForm from "~/components/questionnaire/NumberInputForm.vue";
-import Dropdown from "~/components/global/dropdowns/Dropdown.vue";
+import DefaultDropdown from "~/components/global/dropdowns/DefaultDropdown.vue";
 import validateAllMetrics from "~/utils/bodyMetricsValidation/validateAllMetrics";
 import Toast from "@/components/global/popups/Toast/index.vue";
 
