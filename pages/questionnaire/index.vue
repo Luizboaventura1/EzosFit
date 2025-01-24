@@ -155,16 +155,16 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
-import IntroForm from "~/components/questionnaire/IntroForm.vue";
-import type User from "~/types/UserType";
+import IntroForm from "@/components/questionnaire/IntroForm.vue";
+import type User from "@/types/UserType";
 import { userDataStructure } from "@/utils/userDataStructure";
-import Dropdown from "~/components/global/dropdowns/Dropdown.vue";
+import Dropdown from "@/components/global/dropdowns/Dropdown.vue";
 import SecondaryButton from "../../components/global/buttons/SecondaryButton.vue";
-import PrimaryText from "~/components/global/text/PrimaryText.vue";
-import NumberInputForm from "~/components/questionnaire/NumberInputForm.vue";
+import PrimaryText from "@/components/global/text/PrimaryText.vue";
+import NumberInputForm from "@/components/questionnaire/NumberInputForm.vue";
 import Toast from "@/components/global/popups/Toast/index.vue";
-import validateAllMetrics from "~/utils/bodyMetricsValidation/validateAllMetrics";
-import validateCurrentQuestion from "~/utils/bodyMetricsValidation/validateCurrentQuestion";
+import validateAllMetrics from "@/utils/bodyMetricsValidation/validateAllMetrics";
+import validateCurrentQuestion from "@/utils/bodyMetricsValidation/validateCurrentQuestion";
 
 const router = useRouter();
 const { user } = storeToRefs(userStore());
