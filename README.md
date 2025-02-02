@@ -1,4 +1,4 @@
-# EzosFit
+# EzosFit - In development 🚧
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/Luizboaventura1/EzosFit?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/Luizboaventura1/EzosFit?style=for-the-badge)
