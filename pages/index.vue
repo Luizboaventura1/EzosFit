@@ -1,6 +1,4 @@
 <template>
-  <div class="bg-red-950"><p class="text-center px-4 py-3 text-red-200">🚨 The software is still in development, but you can already access and use some features.</p>
-  </div>
   <header class="h-[95vh] overflow-hidden">
     <nav class="flex items-center w-full h-[100px] px-4">
       <div class="grid gap-3 grid-cols-[auto,1fr] container mx-auto">
