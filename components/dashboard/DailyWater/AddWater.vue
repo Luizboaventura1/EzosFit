@@ -59,13 +59,7 @@ const saveWaterConsumed = (water: number) => {
 
     user.value.dailyLog.dailyConsumption.water = waterSum;
 
-    userStore().updateUserData({
-      dailyLog: {
-        dailyConsumption: {
-          water: waterSum,
-        },
-      },
-    });
+    userStore().updateUserData(user.value);
 
     emit("closeModal");
   } else {
